@@ -1,12 +1,10 @@
 from django.shortcuts import render
-import os
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "parsed_data.settings")
-import django
-django.setup()
+
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 from .models import CrwalingData
 from django.http import HttpResponse
+import time
 from django.template import loader
 # 교보문고의 베스트셀러 웹페이지를 가져옵니다.
 
@@ -15,9 +13,19 @@ from django.template import loader
 def select(request):
     return HttpResponse("sdfjlaejf;ljel")
 
+
+def main(request):
+    context={}
+    return render(request, 'parsed_data/NewFile1.html',context)
+
+
 kyobo_data = []
 
-def book(request):
+
+
+
+def kyobo_book(request):
+
     html = urlopen('http://www.kyobobook.co.kr/bestSellerNew/bestseller.laf?orderClick=d79')
     bsObject = BeautifulSoup(html, "html.parser")
 
@@ -44,10 +52,8 @@ def book(request):
         ksalep = bsObject.find('meta', {'property': 'rb:salePrice'}).get('content')
         kyobo_data.append([rank, kisbn, kname, kauthor, koriginalp, ksalep, klink, kimg])
         rank += 1
+    return render(request, 'parsed_data/book.html', {'books': kyobo_data})
+            # columns=['ISBN','krank','kname','kauthor','kprice','klink','kimg']
+            # df =pd.DataFrame(kyobo_data,columns=columns)
 
-        # columns=['ISBN','krank','kname','kauthor','kprice','klink','kimg']
-        # df =pd.DataFrame(kyobo_data,columns=columns)
-
-
-    return render(request,'parsed_data/book.html',{'books':kyobo_data})
 

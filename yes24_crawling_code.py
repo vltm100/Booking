@@ -16,7 +16,7 @@ bsObject = BeautifulSoup(html, "html.parser")
 link=[]
 yes24=[]
 rank=1
-for tag in soup.find_all('p',{'class':'image'}):
+for tag in bsObject.find_all('p',{'class':'image'}):
     if rank<=20:
         tmp = tag.select('a')[0].get('href')
         ylink='http://www.yes24.com'+tmp
