@@ -1,8 +1,8 @@
 from django.contrib import admin
 
 
-from .models import BookData
+from .models import CrwalingData
 # Register your models here.
 
 
-admin.site.register(BookData)
+admin.site.register(CrwalingData)

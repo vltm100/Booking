@@ -18,14 +18,17 @@
         </tr>
         </thead>
         <tbody>
-        {% for books in context%}
+        {% for books in books%}
         <tr>
-            <td>{{books.title}}</td>
+            <td>{{books.rank}}</td>
+            <td>{{books.isbn}}</td>
+            <td>{{books.name}}</td>
             <td>{{books.author}}</td>
-            <td>{{books.image}}</td>
-            <td>{{books.url}}</td>
             <td>{{books.originalPrice}}</td>
             <td>{{books.salePrice}}</td>
+            <td>{{books.image}}</td>
+            <td>{{books.url}}</td>
+
         </tr>
         {%endfor%}
 

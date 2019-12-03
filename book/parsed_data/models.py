@@ -3,8 +3,10 @@ from django.db import models
 from django import forms
 from django.contrib.postgres.fields import ArrayField
 
-class BookData(models.Model):
-    title=models.CharField(max_length=200)
+class CrwalingData(models.Model):
+    rank=models.IntegerField(max_length=2)
+    isbn=models.CharField(max_length=15)
+    name=models.CharField(max_length=200)
     author=models.CharField(max_length=200)
     image=models.ImageField()
     url=models.URLField()
@@ -13,4 +15,4 @@ class BookData(models.Model):
 
 
 def __str__(self):
-    return self.title
+    return self.name
