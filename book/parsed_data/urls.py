@@ -5,5 +5,5 @@ from django.urls import path
 urlpatterns = [
    path('kyobo/', views.kyobo_book, name="kyobo_book"),
    path('select/', views.select, name="select"),
-   path('', views.main),
+   path('', views.kyobo_book),
 ]

@@ -14,6 +14,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "book.settings")
 import django
 
 
+
 # 교보문고의 베스트셀러 웹페이지를 가져옵니다.
 
 
@@ -49,6 +50,8 @@ for index, book_page_url in enumerate(book_page_urls):
     ksalep = bsObject.find('meta', {'property':'rb:salePrice'}).get('content')
     kyobo_data[index]=[rank,kisbn,kname,kauthor,koriginalp,ksalep,klink,kimg]
     rank+=1
+
+
 
 print(kyobo_data[0][0])
 

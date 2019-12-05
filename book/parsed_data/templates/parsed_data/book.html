@@ -25,25 +25,25 @@
 <th>yes24중고</th></tr>
 </thead>
 <tbody>
-{% for books in bookos %}
+{% for book in kyobo %}
 <tr><td rowspan="4"><img src= "https://image.aladin.co.kr/product/9476/48/cover500/8937473135_1.jpg" width = "175" height="250"/></td>
 <td>책 현시세 정보를 여기다가 넣습니당</td>
-<td rowspan="4">{{books.salePrice}}</td>
+<td rowspan="4">{{book.title}}</td>
 <td rowspan="4">가격</td>
 <td rowspan="4">가격</td>
 <td rowspan="4">가격</td>
 <td rowspan="4">가격</td>
 </tr>
 <tr>
-<td>{{books.name}}</td>
+<td>{{book.isbn}}</td>
 </tr>
 
-<tr><td>{{books.author}} </td>
+<tr><td>{{book.author}} </td>
 </tr>
 
-<tr><td>{{books.isbn}}</td>
+<tr><td></td>
 </tr>
-{%endfor%}
+{% endfor %}
 
 </tbody>
 </table>
