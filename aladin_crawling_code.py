@@ -1,3 +1,21 @@
+
+#알라딘 베스트셀러 코드
+import requests
+from bs4 import BeautifulSoup
+from urllib.request import urlopen
+from bs4 import BeautifulSoup
+book_page_urls = []
+html= urlopen('https://www.aladin.co.kr/shop/common/wbest.aspx?BranchType=1')
+bsObject = BeautifulSoup(html, "html.parser")
+links = bsObject.find_all(class_="bo3")
+i=1
+for links_item in links:
+    if i<=20:
+        book_page_urls.append(links_item.get('href'))
+    i+=1
+print(book_page_urls)
+
+
 #알라딘 베스트셀러 수집
 aladin_data=[]
 rank=1
