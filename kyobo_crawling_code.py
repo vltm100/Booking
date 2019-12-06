@@ -90,9 +90,9 @@ for index, book_page_url in enumerate(book_page_urls):
     kyobo_data.append([rank,kisbn,kname,kauthor,koriginalp,ksalep,klink
                       ,k_yes24,k_yes24_link,k_yes24_used, k_yes24_used_link
                       ,k_aladin, k_aladin_link, k_aladin_used, k_aladin_used_link])
-    print(rank,kisbn,kname,kauthor,koriginalp,ksalep,klink
-                      ,k_yes24,k_yes24_link,k_yes24_used, k_yes24_used_link
-                      ,k_aladin, k_aladin_link, k_aladin_used, k_aladin_used_link)
+    #print(rank,kisbn,kname,kauthor,koriginalp,ksalep,klink
+    #                  ,k_yes24,k_yes24_link,k_yes24_used, k_yes24_used_link
+    #                  ,k_aladin, k_aladin_link, k_aladin_used, k_aladin_used_link)
     rank+=1
 
 #print(kyobo_data)
