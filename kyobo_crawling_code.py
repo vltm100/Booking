@@ -34,8 +34,57 @@ for index, book_page_url in enumerate(book_page_urls):
     klink = bsObject.find('meta', {'property':'rb:itemUrl'}).get('content')
     koriginalp = bsObject.find('meta', {'property': 'rb:originalPrice'}).get('content')
     ksalep = bsObject.find('meta', {'property':'rb:salePrice'}).get('content')
-    kyobo_data.append([rank,kisbn,kname,kauthor,koriginalp,ksalep,klink,kimg])
+    
+    #yes24에서 찾기
+    k_yes24_search="http://www.yes24.com/searchcorner/Search?query="+kisbn
+    #print(k_yes24_search)
+    html2 = urlopen(k_yes24_search)
+    bsObject2 = BeautifulSoup(html2, "html.parser")
+    k_yes24= bsObject2.find('p', {'class':'goods_price'}).find('strong').text
+    tmp=bsObject2.find('td', {'class':'goods_img'}).select('a')[0].get('href')
+    k_yes24_link= 'http://www.yes24.com'+tmp
+    #yes24 중고에서 찾기
+    k_yes24_used=''
+    k_yes24_used_link=''
+    k_yes24_used=bsObject2.find('em', {'class':'act_txt002'})
+    if k_yes24_used!=None:
+        k_yes24_used=bsObject2.find('em', {'class':'act_txt002'}).text
+        k_yes24_used_link=bsObject2.find('p',{'class':'used_info'}).find('a').get('href')
+    #print(k_yes24,k_yes24_link,k_yes24_used, k_yes24_used_link)
+    
+    #알라딘에서 찾기
+    k_aladin_search="https://www.aladin.co.kr/search/wsearchresult.aspx?SearchTarget=All&SearchWord="+kisbn
+    #print(k_aladin_search)
+    html2 = urlopen(k_aladin_search)
+    bsObject2 = BeautifulSoup(html2, "html.parser")
+    k_aladin=bsObject2.find('span', {'class':'ss_p2'}).text
+    k_aladin_link=bsObject2.find('div', {'class':'ss_book_list'}).find('a',{'class':'bo3'}).get('href')
+    
+    #알라딘 중고에서 찾기
+    k_aladin_search="https://www.aladin.co.kr/search/wsearchresult.aspx?SearchTarget=Used&KeyWord="+kisbn
+    #print(k_aladin_search)
+    html2 = urlopen(k_aladin_search)
+    bsObject2 = BeautifulSoup(html2, "html.parser")
+    k_aladin_used=''
+    k_aladin_used_link=bsObject2.find('div', {'class':'ss_book_list'})
+    if k_aladin_used_link!=None:
+        k_aladin_used_link='aladin.co.kr'+bsObject2.find('div', {'class':'ss_book_list'}).find('a').get('href')
+        #k_aladin_used_link2=bsObject2.find('div', {'class':'ss_line5'}).find('img').get('src')
+        k_aladin_used=bsObject2.find('a', {'class':'bo_used'}).text
+        
+    #print( k_aladin_used_link)
+    #print(k_aladin, k_aladin_link, k_aladin_used, k_aladin_used_link)
+    
+    kyobo_data.append([rank,kisbn,kname,kauthor,koriginalp,ksalep,klink
+                      ,k_yes24,k_yes24_link,k_yes24_used, k_yes24_used_link
+                      ,k_aladin, k_aladin_link, k_aladin_used, k_aladin_used_link])
+    print(rank,kisbn,kname,kauthor,koriginalp,ksalep,klink
+                      ,k_yes24,k_yes24_link,k_yes24_used, k_yes24_used_link
+                      ,k_aladin, k_aladin_link, k_aladin_used, k_aladin_used_link)
     rank+=1
-print(kyobo_data)
+
+#print(kyobo_data)
     #columns=['ISBN','krank','kname','kauthor','kprice','klink','kimg']
     #df =pd.DataFrame(kyobo_data,columns=columns)
+
+    #####지금 알라딘 중고 가격찾아오는 부분은 새책이라고 출력됨 추후 수정
