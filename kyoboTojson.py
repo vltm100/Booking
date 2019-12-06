@@ -68,23 +68,8 @@ def main():
         }
         book_list.append(json_book_data)
         with open("kyobo.json", 'w', encoding='utf-8') as json_file:
-            text_list = json.dump(book_list, json_file, indent="\t")
-        '''kyobo_data.append({
-            "title":kname,
-            "isbn":kisbn,
-            "author":kauthor,
-            "img":kimg,
-            "link":klink,
-            "originalp":koriginalp,
-            "salep":ksalep,
-            "rank": rank
-        })
-
-    context={
-        'kyobo':kyobo_data
-    }'''
-
-
+            json.dump(book_list, json_file,ensure_ascii=False, indent="\t")
+       
 
     # 새 데이터 삽입
 
