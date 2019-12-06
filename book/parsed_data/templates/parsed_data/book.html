@@ -26,22 +26,22 @@
 </thead>
 <tbody>
 {% for book in kyobo %}
-<tr><td rowspan="4"><img src= "https://image.aladin.co.kr/product/9476/48/cover500/8937473135_1.jpg" width = "175" height="250"/></td>
-<td>책 현시세 정보를 여기다가 넣습니당</td>
-<td rowspan="4">{{book.title}}</td>
-<td rowspan="4">가격</td>
+<tr><td rowspan="4"><img src= {{book.img}} width = "175" height="250"/></td>
+<td>제목:{{book.title}}</td>
+<td rowspan="4">{{book.originalp}}</td>
+<td rowspan="4"></td>
 <td rowspan="4">가격</td>
 <td rowspan="4">가격</td>
 <td rowspan="4">가격</td>
 </tr>
 <tr>
-<td>{{book.isbn}}</td>
+<td>고유번호: {{book.isbn}}</td>
 </tr>
 
-<tr><td>{{book.author}} </td>
+<tr><td>저자: {{book.author}} </td>
 </tr>
 
-<tr><td></td>
+<tr><td>순위: {{book.rank}}</td>
 </tr>
 {% endfor %}
 
