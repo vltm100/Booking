@@ -1,10 +1,4 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[ ]:
-
-
-#yes24베스트셀러 코드
+#yes24베스트셀러 코드 최종
 import requests
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
@@ -39,9 +33,71 @@ for book_page_url in link:
     ylink = book_page_url
     yoriginalp = bsObject.find('div', {'class': 'gd_infoTb'}).find('em',{'class':'yes_m'}).text
     ysalep = bsObject.find('div', {'class': 'gd_infoTb'}).find('tr',{'class':'accentRow'}).find('em',{'class':'yes_m'}).text
-    yes24_data.append([rank,yisbn,yname,yauthor,yoriginalp,ysalep,ylink,yimg])
-    rank+=1
+    #yes24_data.append([rank,yisbn,yname,yauthor,yoriginalp,ysalep,ylink,yimg])
+    #print(yisbn)
     #columns=['ISBN','krank','kname','kauthor','kprice','klink','kimg']
     #df =pd.DataFrame(kyobo_data,columns=columns)
-print(yes24_data)
-
+    
+    y_kyobo_search="https://search.kyobobook.co.kr/web/search?vPstrKeyWord="+yisbn
+    html2 = urlopen(y_kyobo_search)
+    bsObject2 = BeautifulSoup(html2, "html.parser")
+    #print(y_kyobo_search)
+    
+    y_kyobo=bsObject2.find('div',{'class':'sell_price'}).find('strong').text
+    y_kyobo_link=bsObject2.find('div',{'class':'cover'}).find('a').get('href')
+    
+    
+    #yes24 중고에서 찾기
+    y_yes24_search="http://www.yes24.com/searchcorner/Search?query="+yisbn
+    #print(y_yes24_search)
+    
+    html2 = urlopen(y_yes24_search)
+    bsObject2 = BeautifulSoup(html2, "html.parser")
+    
+    y_yes24_used=''
+    y_yes24_used_link=''
+    y_yes24_used=bsObject2.find('em', {'class':'act_txt002'})
+    if y_yes24_used!=None:
+        y_yes24_used=bsObject2.find('em', {'class':'act_txt002'}).text
+        y_yes24_used_link=bsObject2.find('p',{'class':'used_info'}).find('a').get('href')
+   
+    #알라딘에서 찾기
+    y_aladin_search="https://www.aladin.co.kr/search/wsearchresult.aspx?SearchTarget=All&SearchWord="+yisbn
+    #print(y_aladin_search)
+    html2 = urlopen(y_aladin_search)
+    bsObject2 = BeautifulSoup(html2, "html.parser")
+    y_aladin=bsObject2.find('span', {'class':'ss_p2'}).text
+    y_aladin_link=bsObject2.find('div', {'class':'ss_book_list'}).find('a',{'class':'bo3'}).get('href')
+    
+#알라딘 중고에서 찾기
+    y_aladin_search="https://www.aladin.co.kr/search/wsearchresult.aspx?SearchTarget=Used&KeyWord="+yisbn
+    #print("주소다주소: ",y_aladin_search)
+    html2 = urlopen(y_aladin_search)
+    bsObject2 = BeautifulSoup(html2, "html.parser")
+    y_aladin_used=''
+    y_aladin_used_link=bsObject2.find('div', {'class':'ss_book_list'})
+    #중고책에 자료가 있으면
+    if y_aladin_used_link!=None:
+        
+        #k_aladin_used_link2=bsObject2.find('div', {'class':'ss_line5'}).find('img').get('src')
+        #중고가격 가져오기 가장 위에 정보로
+        flag=False
+        temp=bsObject2.find_all('a',{'class':'bo_used'})
+        for item in temp:
+            if flag:
+                y_aladin_used=item.text
+                y_aladin_used_link='aladin.co.kr'+item.get('href')
+                break
+            if item.text[0]=='판':
+                flag=True
+  
+    yes24_data.append([rank,yisbn,yname,yauthor,yoriginalp,ysalep,ylink
+                      ,y_kyobo, y_kyobo_link, y_yes24_used, y_yes24_used_link
+                      ,y_aladin, y_aladin_link, y_aladin_used, y_aladin_used_link])
+    print(rank,yisbn,yname,yauthor,yoriginalp,ysalep,ylink
+                      ,y_kyobo, y_kyobo_link, y_yes24_used, y_yes24_used_link
+                      ,y_aladin, y_aladin_link, y_aladin_used, y_aladin_used_link)
+    #print(rank," : ", y_aladin_used, y_aladin_used_link)
+    
+    rank+=1
+#print(yes24_data)
