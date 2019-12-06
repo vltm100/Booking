@@ -37,7 +37,7 @@ for book_page_url in link:
     #print(yisbn)
     #columns=['ISBN','krank','kname','kauthor','kprice','klink','kimg']
     #df =pd.DataFrame(kyobo_data,columns=columns)
-    
+#교보에서 찾기
     y_kyobo_search="https://search.kyobobook.co.kr/web/search?vPstrKeyWord="+yisbn
     html2 = urlopen(y_kyobo_search)
     bsObject2 = BeautifulSoup(html2, "html.parser")
@@ -47,7 +47,7 @@ for book_page_url in link:
     y_kyobo_link=bsObject2.find('div',{'class':'cover'}).find('a').get('href')
     
     
-    #yes24 중고에서 찾기
+#yes24 중고에서 찾기
     y_yes24_search="http://www.yes24.com/searchcorner/Search?query="+yisbn
     #print(y_yes24_search)
     
@@ -60,8 +60,8 @@ for book_page_url in link:
     if y_yes24_used!=None:
         y_yes24_used=bsObject2.find('em', {'class':'act_txt002'}).text
         y_yes24_used_link=bsObject2.find('p',{'class':'used_info'}).find('a').get('href')
-   
-    #알라딘에서 찾기
+
+#알라딘에서 찾기
     y_aladin_search="https://www.aladin.co.kr/search/wsearchresult.aspx?SearchTarget=All&SearchWord="+yisbn
     #print(y_aladin_search)
     html2 = urlopen(y_aladin_search)
@@ -94,9 +94,9 @@ for book_page_url in link:
     yes24_data.append([rank,yisbn,yname,yauthor,yoriginalp,ysalep,ylink
                       ,y_kyobo, y_kyobo_link, y_yes24_used, y_yes24_used_link
                       ,y_aladin, y_aladin_link, y_aladin_used, y_aladin_used_link])
-    print(rank,yisbn,yname,yauthor,yoriginalp,ysalep,ylink
-                      ,y_kyobo, y_kyobo_link, y_yes24_used, y_yes24_used_link
-                      ,y_aladin, y_aladin_link, y_aladin_used, y_aladin_used_link)
+    #print(rank,yisbn,yname,yauthor,yoriginalp,ysalep,ylink
+    #                  ,y_kyobo, y_kyobo_link, y_yes24_used, y_yes24_used_link
+     #                 ,y_aladin, y_aladin_link, y_aladin_used, y_aladin_used_link)
     #print(rank," : ", y_aladin_used, y_aladin_used_link)
     
     rank+=1
