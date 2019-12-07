@@ -19,7 +19,7 @@ import json
 
 def main():
 
-    with open('kyobo.json', 'r', encoding='utf-8') as json_file:
+    with open('kyobo_json/kyobo.json', 'r', encoding='utf-8') as json_file:
         kyobo_data = json.load(json_file)
 
     for book in kyobo_data:
