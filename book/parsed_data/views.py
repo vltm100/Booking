@@ -31,33 +31,23 @@ def main(request):
 
 def yes24(request):
     workDir = os.path.abspath('.')
-    with open('parsed_data\yes24_json\yes24.json', 'r', encoding='utf-8') as json_file:
+    with open('parsed_data/yes24_json/yes24.json', 'r', encoding='utf-8') as json_file:
         yes24_data = json.load(json_file)
 
     return render(request, 'parsed_data/yes24.html', {'yes24': yes24_data})
-            # columns=['ISBN','krank','kname','kauthor','kprice','klink','kimg']
-            # df =pd.DataFrame(kyobo_data,columns=columns)
-
-def aladin(request):
-    workDir = os.path.abspath('.')
-    with open('parsed_data\aladin_json\aladin.json', 'r', encoding='utf-8') as json_file:
-        aladin_data = json.load(json_file)
-
-    return render(request, 'parsed_data/aladin.html', {'aladin': aladin_data})
-            # columns=['ISBN','krank','kname','kauthor','kprice','klink','kimg']
-            # df =pd.DataFrame(kyobo_data,columns=columns)
 
 
 def kyobo(request):
     workDir = os.path.abspath('.')
-    with open('parsed_data\kyobo_json\kyobo.json', 'r', encoding='utf-8') as json_file:
+    with open('parsed_data/kyobo_json/kyobo.json', 'r', encoding='utf-8') as json_file:
         kyobo_data = json.load(json_file)
-       
+
+    return render(request, 'parsed_data/kyobo.html', {'kyobo': kyobo_data ,'rank':rank})
 
 
-    rank=1
-    return render(request, 'parsed_data/kyobo.html', {'kyobo': kyobo ,'rank':rank})
-            # columns=['ISBN','krank','kname','kauthor','kprice','klink','kimg']
-            # df =pd.DataFrame(kyobo_data,columns=columns)
+def aladin(request):
+    workDir = os.path.abspath('.')
+    with open('parsed_data/aladin_json/aladin.json', 'r', encoding='utf-8') as json_file:
+        aladin_data = json.load(json_file)
 
-
+    return render(request, 'parsed_data/aladin.html', {'aladin': aladin_data})
