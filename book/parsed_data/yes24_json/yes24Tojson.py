@@ -54,7 +54,7 @@ for book_page_url in link:
 
     html2 = urlopen(y_yes24_search)
     bsObject2 = BeautifulSoup(html2, "html.parser")
-
+    y_yes24= bsObject2.find('p', {'class': 'goods_price'}).find('strong').text
     y_yes24_used = ''
     y_yes24_used_link = ''
     y_yes24_used = bsObject2.find('em', {'class': 'act_txt002'})
@@ -93,8 +93,10 @@ for book_page_url in link:
                 flag = True
 
     yes24_data.append([rank, yisbn, yname, yauthor, yoriginalp, ysalep, ylink
-                          , y_kyobo, y_kyobo_link, y_yes24_used, y_yes24_used_link
+                          , y_kyobo, y_kyobo_link,y_yes24, y_yes24_used, y_yes24_used_link
                           , y_aladin, y_aladin_link, y_aladin_used, y_aladin_used_link])
+    rank += 1
+
     json_book_data = {
         "title": yname,
         "isbn": yisbn,
@@ -106,6 +108,7 @@ for book_page_url in link:
         "rank": rank,
         "y_kyobo": y_kyobo,
         "y_kyobo_link": y_kyobo_link,
+        "y_yes24":y_yes24,
         "y_yes24_used": y_yes24_used,
         "y_yes24_used_link": y_yes24_used_link,
         "y_aladin": y_aladin,
@@ -114,9 +117,10 @@ for book_page_url in link:
         "y_aladin_used_link": y_aladin_used_link
 
     }
+
     book_list.append(json_book_data)
     with open("yes24.json", 'w', encoding='utf-8') as json_file:
         json.dump(book_list, json_file, ensure_ascii=False, indent="\t")
 
-rank += 1
+
 # print(yes24_data)

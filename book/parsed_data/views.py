@@ -42,7 +42,7 @@ def kyobo(request):
     with open('parsed_data/kyobo_json/kyobo.json', 'r', encoding='utf-8') as json_file:
         kyobo_data = json.load(json_file)
 
-    return render(request, 'parsed_data/kyobo.html', {'kyobo': kyobo_data ,'rank':rank})
+    return render(request, 'parsed_data/kyobo.html', {'kyobo': kyobo_data})
 
 
 def aladin(request):

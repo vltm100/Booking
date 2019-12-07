@@ -68,6 +68,7 @@ for book_page_url in book_page_urls:
     # print("주소다주소: ",a_aladin_search)
     html2 = urlopen(a_aladin_search)
     bsObject2 = BeautifulSoup(html2, "html.parser")
+    a_aladin=bsObject2.find('span', {'class': 'ss_p2'}).text
     a_aladin_used = ''
     a_aladin_used_link = bsObject2.find('div', {'class': 'ss_book_list'})
     # 중고책에 자료가 있으면
@@ -105,14 +106,16 @@ for book_page_url in book_page_urls:
         "a_yes24_link": a_yes24_link,
         "a_yes24_used": a_yes24_used,
         "a_yes24_used_link": a_yes24_used_link,
+        "a_aladin":a_aladin,
         "a_aladin_used": a_aladin_used,
         "a_aladin_used_link": a_aladin_used_link
 
     }
+    rank += 1
     book_list.append(json_book_data)
     with open("aladin.json", 'w', encoding='utf-8') as json_file:
         json.dump(book_list, json_file, ensure_ascii=False, indent="\t")
 
-rank += 1
+
 
 # print(aladin_data)

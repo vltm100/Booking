@@ -66,7 +66,8 @@
 
 <table id="example1" class="display" style="width:100%">
 <thead>
-<tr><th>도서 이미지</th>
+
+    <th>도서 이미지</th>
 <th>도서 정보</th>
 <th>교보 문고 </th>
 <th>알라딘</th>
@@ -76,21 +77,20 @@
 </thead>
 <tbody>
 {% for book in aladin %}
-
-
-<tr><td rowspan="4"><img src=  {{book.img}} width = "175" height="250"/></td>
-<td>{{book.originalp}}</td>
-<td rowspan="4" >{{book.salep}}</td>
-<td rowspan="4">{{book.a_aladin}}</td>
-<td rowspan="4">{{book.a_aladin_use
-<td rowspan="4">{{book.a_yes24}}</td></td>
-<td rowspan="4">{{book.a_yes24_used}}</td>
+<tr>
+    <td rowspan="4"><img src=  {{book.img}} width = "125" height="180"/></td>
+    <td>제목 :{{book.title}}</td>
+    <td rowspan="4" ><a href="{{book.link}}">{{book.salep}}</a></td>
+    <td rowspan="4">{{book.a_aladin}}</td>
+    <td rowspan="4">{{book.a_yes24}}</td>
+    <td rowspan="4"><a href="{{book.a_aladin_used_link}}">{{book.a_aladin_used}}</a></td>
+    <td rowspan="4"><a href="{{book.a_yes24_used_link}}">{{book.a_yes24_used}}</a> </td>
 </tr>
 <tr>
-<td>제목: {{book.title}}</td>
+<td>저자: {{book.author}}</td>
 </tr>
 
-<tr><td>저자: {{book.author}} </td>
+<tr><td>원가: {{book.originalp}} </td>
 </tr>
 
 <tr><td>고유번호: {{book.isbn}}</td>

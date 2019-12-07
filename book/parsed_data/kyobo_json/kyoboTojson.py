@@ -87,7 +87,7 @@ for index, book_page_url in enumerate(book_page_urls):
 
     # print( k_aladin_used_link)
     # print(k_aladin, k_aladin_link, k_aladin_used, k_aladin_used_link)
-    rank += 1
+
     kyobo_data.append([rank, kisbn, kname, kauthor, koriginalp, ksalep, klink
                           , k_yes24, k_yes24_link, k_yes24_used, k_yes24_used_link
                           , k_aladin, k_aladin_link, k_aladin_used, k_aladin_used_link])
@@ -110,6 +110,7 @@ for index, book_page_url in enumerate(book_page_urls):
         "k_aladin_used_link": k_aladin_used_link
 
     }
+    rank += 1
     book_list.append(json_book_data)
     with open("kyobo.json", 'w', encoding='utf-8') as json_file:
         json.dump(book_list, json_file, ensure_ascii=False, indent="\t")
