@@ -62,13 +62,16 @@ for book_page_url in book_page_urls:
         a_yes24_used = bsObject2.find('em', {'class': 'act_txt002'}).text
         a_yes24_used_link = bsObject2.find('p', {'class': 'used_info'}).find('a').get('href')
     # print(rank,":",a_yes24,a_yes24_link,a_yes24_used, a_yes24_used_link)
+    else:
+        a_yes24_used='-'
+        a_yes24_used_link=''
 
     # 알라딘 중고에서 찾기
     a_aladin_search = "https://www.aladin.co.kr/search/wsearchresult.aspx?SearchTarget=Used&KeyWord=" + aisbn
     # print("주소다주소: ",a_aladin_search)
     html2 = urlopen(a_aladin_search)
     bsObject2 = BeautifulSoup(html2, "html.parser")
-    a_aladin=bsObject2.find('span', {'class': 'ss_p2'}).text
+
     a_aladin_used = ''
     a_aladin_used_link = bsObject2.find('div', {'class': 'ss_book_list'})
     # 중고책에 자료가 있으면
@@ -81,12 +84,14 @@ for book_page_url in book_page_urls:
         for item in temp:
             if flag:
                 a_aladin_used = item.text
-                a_aladin_used_link = 'aladin.co.kr' + item.get('href')
+                a_aladin_used_link = 'http://www.aladin.co.kr' + item.get('href')
                 break
             if item.text[0] == '판':
                 flag = True
         # print(rank,":",a_aladin_used, a_aladin_used_link)
-
+    else:
+        a_aladin_used='-'
+        a_aladin_used_link=''
     # aladin_data에 모든 정보 저장
     aladin_data.append([rank, aisbn, aname, aauthor, aoriginalp, asalep, alink
                            , a_kyobo, a_kyobo_link, a_yes24, a_yes24_link
@@ -106,7 +111,6 @@ for book_page_url in book_page_urls:
         "a_yes24_link": a_yes24_link,
         "a_yes24_used": a_yes24_used,
         "a_yes24_used_link": a_yes24_used_link,
-        "a_aladin":a_aladin,
         "a_aladin_used": a_aladin_used,
         "a_aladin_used_link": a_aladin_used_link
 

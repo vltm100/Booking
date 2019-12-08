@@ -22,7 +22,9 @@ def main(request):
 
 def yes24(request):
     workDir = os.path.abspath('.')
-    with open('parsed_data/yes24_json/yes24.json', 'r', encoding='utf-8') as json_file:
+    #with open('parsed_data/yes24_json/yes24.json', 'r', encoding='utf-8') as json_file:
+        #yes24_data = json.load(json_file)
+    with open('parsed_data/crawlingTojson/yes24.json', 'r', encoding='utf-8') as json_file:
         yes24_data = json.load(json_file)
 
     return render(request, 'parsed_data/yes24.html', {'yes24': yes24_data})
@@ -30,7 +32,9 @@ def yes24(request):
 
 def kyobo(request):
     workDir = os.path.abspath('.')
-    with open('parsed_data/kyobo_json/kyobo.json', 'r', encoding='utf-8') as json_file:
+    #with open('parsed_data/kyobo_json/kyobo.json', 'r', encoding='utf-8') as json_file:
+       # kyobo_data = json.load(json_file)
+    with open('parsed_data/crawlingTojson/kyobo.json', 'r', encoding='utf-8') as json_file:
         kyobo_data = json.load(json_file)
 
     return render(request, 'parsed_data/kyobo.html', {'kyobo': kyobo_data})
@@ -38,7 +42,9 @@ def kyobo(request):
 
 def aladin(request):
     workDir = os.path.abspath('.')
-    with open('parsed_data/aladin_json/aladin.json', 'r', encoding='utf-8') as json_file:
+    #with open('parsed_data/aladin_json/aladin.json', 'r', encoding='utf-8') as json_file:
+       # aladin_data = json.load(json_file)
+    with open('parsed_data/crawlingTojson/aladin.json', 'r', encoding='utf-8') as json_file:
         aladin_data = json.load(json_file)
 
     return render(request, 'parsed_data/aladin.html', {'aladin': aladin_data})

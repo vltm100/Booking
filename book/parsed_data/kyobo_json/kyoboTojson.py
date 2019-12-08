@@ -52,7 +52,9 @@ for index, book_page_url in enumerate(book_page_urls):
         k_yes24_used = bsObject2.find('em', {'class': 'act_txt002'}).text
         k_yes24_used_link = bsObject2.find('p', {'class': 'used_info'}).find('a').get('href')
     # print(k_yes24,k_yes24_link,k_yes24_used, k_yes24_used_link)
-
+    else:
+        k_yes24_used='-'
+        k_yes24_used_link=''
     # 알라딘에서 찾기
     k_aladin_search = "https://www.aladin.co.kr/search/wsearchresult.aspx?SearchTarget=All&SearchWord=" + kisbn
     # print(k_aladin_search)
@@ -78,11 +80,13 @@ for index, book_page_url in enumerate(book_page_urls):
         for item in temp:
             if flag:
                 k_aladin_used = item.text
-                k_aladin_used_link = 'aladin.co.kr' + item.get('href')
+                k_aladin_used_link = 'http://www.aladin.co.kr' + item.get('href')
                 break
             if item.text[0] == '판':
                 flag = True
-
+    else:
+        k_aladin_used='-'
+        k_aladin_used_link = ''
         # k_aladin_used=bsObject2.find('a', {'class':'bo_used'}).text#새책으로나옴
 
     # print( k_aladin_used_link)

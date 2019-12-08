@@ -4,20 +4,20 @@ from bs4 import BeautifulSoup
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 import json
-html = urlopen('http://www.yes24.com/24/category/bestseller?CategoryNumber=117')
+html = urlopen('http://www.yes24.com/24/category/bestseller')
 bsObject = BeautifulSoup(html, "html.parser")
 
 link = []
 yes24 = []
-rank = 1
+temp = 1
 book_list=[]
 for tag in bsObject.find_all('p', {'class': 'image'}):
-    if rank <= 20:
+    if temp <= 20:
         tmp = tag.select('a')[0].get('href')
         ylink = 'http://www.yes24.com' + tmp
         link.append(ylink)
         yname = tag.find('img').get('alt')
-        rank += 1
+        temp += 1
 
 yes24_data = []
 rank = 1
@@ -62,6 +62,9 @@ for book_page_url in link:
         y_yes24_used = bsObject2.find('em', {'class': 'act_txt002'}).text
         y_yes24_used_link = bsObject2.find('p', {'class': 'used_info'}).find('a').get('href')
 
+    else:
+        y_yes24_used='-'
+        y_yes24_used_link=''
     # 알라딘에서 찾기
     y_aladin_search = "https://www.aladin.co.kr/search/wsearchresult.aspx?SearchTarget=All&SearchWord=" + yisbn
     # print(y_aladin_search)
@@ -87,15 +90,17 @@ for book_page_url in link:
         for item in temp:
             if flag:
                 y_aladin_used = item.text
-                y_aladin_used_link = 'aladin.co.kr' + item.get('href')
+                y_aladin_used_link = 'http://www.aladin.co.kr' + item.get('href')
                 break
             if item.text[0] == '판':
                 flag = True
-
+    else:
+        y_aladin_used='-'
+        y_aladin_used_link=''
     yes24_data.append([rank, yisbn, yname, yauthor, yoriginalp, ysalep, ylink
                           , y_kyobo, y_kyobo_link,y_yes24, y_yes24_used, y_yes24_used_link
                           , y_aladin, y_aladin_link, y_aladin_used, y_aladin_used_link])
-    rank += 1
+
 
     json_book_data = {
         "title": yname,
@@ -117,7 +122,7 @@ for book_page_url in link:
         "y_aladin_used_link": y_aladin_used_link
 
     }
-
+    rank += 1
     book_list.append(json_book_data)
     with open("yes24.json", 'w', encoding='utf-8') as json_file:
         json.dump(book_list, json_file, ensure_ascii=False, indent="\t")
