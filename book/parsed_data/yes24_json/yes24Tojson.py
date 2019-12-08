@@ -10,7 +10,7 @@ bsObject = BeautifulSoup(html, "html.parser")
 link = []
 yes24 = []
 temp = 1
-book_list=[]
+book_list = []
 for tag in bsObject.find_all('p', {'class': 'image'}):
     if temp <= 20:
         tmp = tag.select('a')[0].get('href')
@@ -54,7 +54,7 @@ for book_page_url in link:
 
     html2 = urlopen(y_yes24_search)
     bsObject2 = BeautifulSoup(html2, "html.parser")
-    y_yes24= bsObject2.find('p', {'class': 'goods_price'}).find('strong').text
+    y_yes24 = bsObject2.find('p', {'class': 'goods_price'}).find('strong').text
     y_yes24_used = ''
     y_yes24_used_link = ''
     y_yes24_used = bsObject2.find('em', {'class': 'act_txt002'})
@@ -63,8 +63,8 @@ for book_page_url in link:
         y_yes24_used_link = bsObject2.find('p', {'class': 'used_info'}).find('a').get('href')
 
     else:
-        y_yes24_used='-'
-        y_yes24_used_link=''
+        y_yes24_used = '-'
+        y_yes24_used_link = ''
     # 알라딘에서 찾기
     y_aladin_search = "https://www.aladin.co.kr/search/wsearchresult.aspx?SearchTarget=All&SearchWord=" + yisbn
     # print(y_aladin_search)
@@ -86,7 +86,7 @@ for book_page_url in link:
         # k_aladin_used_link2=bsObject2.find('div', {'class':'ss_line5'}).find('img').get('src')
         # 중고가격 가져오기 가장 위에 정보로
         flag = False
-        temp=bsObject2.find_all(class_="bo_used")
+        temp = bsObject2.find_all(class_="bo_used")
         for item in temp:
             # if item.text[-1]=='원':
 
@@ -98,21 +98,22 @@ for book_page_url in link:
                 else:
                     y_aladin_used = '-'
                     y_aladin_used_link = ''
-                    break
+                    flag= False
 
             if item.text[0] == '판':
                 flag = True
 
 
-        else:
-            y_aladin_used = '-'
-            y_aladin_used_link = ''
+    else:
+        y_aladin_used = '-'
+        y_aladin_used_link = ''
 
     yes24_data.append([rank, yisbn, yname, yauthor, yoriginalp, ysalep, ylink
-                          , y_kyobo, y_kyobo_link,y_yes24, y_yes24_used, y_yes24_used_link
+                          , y_kyobo, y_kyobo_link, y_yes24, y_yes24_used, y_yes24_used_link
                           , y_aladin, y_aladin_link, y_aladin_used, y_aladin_used_link])
-
-
+    print([rank, yisbn, yname, yauthor, yoriginalp, ysalep, ylink
+              , y_kyobo, y_kyobo_link, y_yes24, y_yes24_used, y_yes24_used_link
+              , y_aladin, y_aladin_link, y_aladin_used, y_aladin_used_link])
     json_book_data = {
         "title": yname,
         "isbn": yisbn,
@@ -124,7 +125,7 @@ for book_page_url in link:
         "rank": rank,
         "y_kyobo": y_kyobo,
         "y_kyobo_link": y_kyobo_link,
-        "y_yes24":y_yes24,
+        "y_yes24": y_yes24,
         "y_yes24_used": y_yes24_used,
         "y_yes24_used_link": y_yes24_used_link,
         "y_aladin": y_aladin,

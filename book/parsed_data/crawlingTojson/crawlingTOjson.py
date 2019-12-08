@@ -100,9 +100,9 @@ def aladin():
                     flag = True
 
 
-            else:
-                a_aladin_used = '-'
-                a_aladin_used_link = ''
+        else:
+            a_aladin_used = '-'
+            a_aladin_used_link = ''
         # aladin_data에 모든 정보 저장
         aladin_data.append([rank, aisbn, aname, aauthor, aoriginalp, asalep, alink
                                , a_kyobo, a_kyobo_link, a_yes24, a_yes24_link
@@ -220,9 +220,9 @@ def kyobo():
                     flag = True
 
 
-            else:
-                k_aladin_used = '-'
-                k_aladin_used_link = ''
+        else:
+            k_aladin_used = '-'
+            k_aladin_used_link = ''
             # k_aladin_used=bsObject2.find('a', {'class':'bo_used'}).text#새책으로나옴
 
         # print( k_aladin_used_link)
@@ -369,9 +369,9 @@ def yes24():
                     flag = True
 
 
-            else:
-                y_aladin_used = '-'
-                y_aladin_used_link = ''
+        else:
+            y_aladin_used = '-'
+            y_aladin_used_link = ''
 
         yes24_data.append([rank, yisbn, yname, yauthor, yoriginalp, ysalep, ylink
                               , y_kyobo, y_kyobo_link, y_yes24, y_yes24_used, y_yes24_used_link
@@ -412,7 +412,7 @@ def main():
         kyobo()
         aladin()
         yes24()
-    time.sleep(86400)
+        time.sleep(86400)
 
 if __name__ == '__main__':
     main()
