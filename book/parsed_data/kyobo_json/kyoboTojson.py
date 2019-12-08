@@ -76,17 +76,27 @@ for index, book_page_url in enumerate(book_page_urls):
         # k_aladin_used_link2=bsObject2.find('div', {'class':'ss_line5'}).find('img').get('src')
         # 중고가격 가져오기 가장 위에 정보로
         flag = False
-        temp = bsObject2.find_all('a', {'class': 'bo_used'})
+        temp = bsObject2.find_all(class_="bo_used")
         for item in temp:
+            # if item.text[-1]=='원':
+
             if flag:
                 k_aladin_used = item.text
-                k_aladin_used_link = 'http://www.aladin.co.kr' + item.get('href')
-                break
+                if k_aladin_used[-1] == '원':
+                    k_aladin_used_link = 'http://www.aladin.co.kr' + item.get('href')
+                    break
+                else:
+                    k_aladin_used = '-'
+                    k_aladin_used_link = ''
+                    break
+
             if item.text[0] == '판':
                 flag = True
-    else:
-        k_aladin_used='-'
-        k_aladin_used_link = ''
+
+
+        else:
+            k_aladin_used = '-'
+            k_aladin_used_link = ''
         # k_aladin_used=bsObject2.find('a', {'class':'bo_used'}).text#새책으로나옴
 
     # print( k_aladin_used_link)

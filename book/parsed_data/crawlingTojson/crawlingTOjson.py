@@ -82,18 +82,27 @@ def aladin():
             # k_aladin_used_link2=bsObject2.find('div', {'class':'ss_line5'}).find('img').get('src')
             # 중고가격 가져오기 가장 위에 정보로
             flag = False
-            temp = bsObject2.find_all('a', {'class': 'bo_used'})
+            temp = bsObject2.find_all(class_="bo_used")
             for item in temp:
+                # if item.text[-1]=='원':
+
                 if flag:
                     a_aladin_used = item.text
-                    a_aladin_used_link = 'http://www.aladin.co.kr' + item.get('href')
-                    break
+                    if a_aladin_used[-1] == '원':
+                        a_aladin_used_link = 'http://www.aladin.co.kr' + item.get('href')
+                        break
+                    else:
+                        a_aladin_used = '-'
+                        a_aladin_used_link = ''
+                        break
+
                 if item.text[0] == '판':
                     flag = True
-            # print(rank,":",a_aladin_used, a_aladin_used_link)
-        else:
-            a_aladin_used = '-'
-            a_aladin_used_link = ''
+
+
+            else:
+                a_aladin_used = '-'
+                a_aladin_used_link = ''
         # aladin_data에 모든 정보 저장
         aladin_data.append([rank, aisbn, aname, aauthor, aoriginalp, asalep, alink
                                , a_kyobo, a_kyobo_link, a_yes24, a_yes24_link
@@ -193,17 +202,27 @@ def kyobo():
             # k_aladin_used_link2=bsObject2.find('div', {'class':'ss_line5'}).find('img').get('src')
             # 중고가격 가져오기 가장 위에 정보로
             flag = False
-            temp = bsObject2.find_all('a', {'class': 'bo_used'})
+            temp = bsObject2.find_all(class_="bo_used")
             for item in temp:
+                # if item.text[-1]=='원':
+
                 if flag:
                     k_aladin_used = item.text
-                    k_aladin_used_link = 'http://www.aladin.co.kr' + item.get('href')
-                    break
+                    if k_aladin_used[-1] == '원':
+                        k_aladin_used_link = 'http://www.aladin.co.kr' + item.get('href')
+                        break
+                    else:
+                        k_aladin_used = '-'
+                        k_aladin_used_link = ''
+                        break
+
                 if item.text[0] == '판':
                     flag = True
-        else:
-            k_aladin_used = '-'
-            k_aladin_used_link = ''
+
+
+            else:
+                k_aladin_used = '-'
+                k_aladin_used_link = ''
             # k_aladin_used=bsObject2.find('a', {'class':'bo_used'}).text#새책으로나옴
 
         # print( k_aladin_used_link)
@@ -332,17 +351,28 @@ def yes24():
             # k_aladin_used_link2=bsObject2.find('div', {'class':'ss_line5'}).find('img').get('src')
             # 중고가격 가져오기 가장 위에 정보로
             flag = False
-            temp = bsObject2.find_all('a', {'class': 'bo_used'})
+            temp = bsObject2.find_all(class_="bo_used")
             for item in temp:
+                # if item.text[-1]=='원':
+
                 if flag:
                     y_aladin_used = item.text
-                    y_aladin_used_link = 'http://www.aladin.co.kr' + item.get('href')
-                    break
+                    if y_aladin_used[-1] == '원':
+                        y_aladin_used_link = 'http://www.aladin.co.kr' + item.get('href')
+                        break
+                    else:
+                        y_aladin_used = '-'
+                        y_aladin_used_link = ''
+                        break
+
                 if item.text[0] == '판':
                     flag = True
-        else:
-            y_aladin_used = '-'
-            y_aladin_used_link = ''
+
+
+            else:
+                y_aladin_used = '-'
+                y_aladin_used_link = ''
+
         yes24_data.append([rank, yisbn, yname, yauthor, yoriginalp, ysalep, ylink
                               , y_kyobo, y_kyobo_link, y_yes24, y_yes24_used, y_yes24_used_link
                               , y_aladin, y_aladin_link, y_aladin_used, y_aladin_used_link])
@@ -382,7 +412,7 @@ def main():
         kyobo()
         aladin()
         yes24()
-    time.sleep(100)
+    time.sleep(86400)
 
 if __name__ == '__main__':
     main()
