@@ -94,7 +94,7 @@ def aladin():
                     else:
                         a_aladin_used = '-'
                         a_aladin_used_link = ''
-                        break
+                        flag = False
 
                 if item.text[0] == '판':
                     flag = True
@@ -214,7 +214,7 @@ def kyobo():
                     else:
                         k_aladin_used = '-'
                         k_aladin_used_link = ''
-                        break
+                        flag=False
 
                 if item.text[0] == '판':
                     flag = True
@@ -363,7 +363,7 @@ def yes24():
                     else:
                         y_aladin_used = '-'
                         y_aladin_used_link = ''
-                        break
+                        flag= False
 
                 if item.text[0] == '판':
                     flag = True
