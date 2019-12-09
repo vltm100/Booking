@@ -12,10 +12,13 @@
 
 3. 프로젝트 환경
  - AWS 가상환경 활용
+ - 인스턴스 보안그룹 8000번 포트 오픈
+ - settings.py에 자신의 퍼블릭DNS 퍼블릭IP 입력 EX) ALLOWED_HOSTS['ec2-54-173-3-47.compute-       1.amazonaws.com','54.173.3.47']
  - 필요환경 requirement.txt 참고
  
 4. 사용법
-
+ - manage.py 파일 경로로 이동
+ - python3 manage.py runserver 0:8000
 
  ![main.JPG](./image/main.JPG)
  
