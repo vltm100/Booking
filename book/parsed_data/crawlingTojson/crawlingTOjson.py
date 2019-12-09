@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
+from time import sleep
 import json
 
 def aladin():
@@ -409,10 +410,11 @@ def yes24():
 
 def main():
     while True:
+        sleep(86400) #24시간
         kyobo()
         aladin()
         yes24()
-        time.sleep(86400)
+
 
 if __name__ == '__main__':
     main()
